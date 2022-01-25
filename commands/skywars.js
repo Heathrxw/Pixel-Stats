@@ -1,8 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const HypixelAPIReborn = require('hypixel-api-reborn')
 const { MessageEmbed } = require('discord.js');
-const { apikey, color, footer } = require('../config.json')
-const hypixelAPIReborn = new HypixelAPIReborn.Client(apikey);
+const {color, footer } = require('../config.json')
+const hypixelAPIReborn = require('../hypixel.js')
 const commaNumber = require('comma-number');
 
 module.exports = {
@@ -16,7 +15,7 @@ module.exports = {
         hypixelAPIReborn.getPlayer(username).then((player) => {
             const skywarsEmbed = new MessageEmbed()
              .setColor(color)
-             .setTitle(`${player}'s Skywars Statistics`)
+             .setTitle(`${player}'s Skywars Overall Statistics`)
              .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/Skywars-64.png')
              .addField('Kills', commaNumber(player.stats.skywars.kills), true)
              .addField('Deaths', commaNumber(player.stats.skywars.deaths), true)
@@ -34,7 +33,7 @@ module.exports = {
              .setFooter({ text: footer });
             interaction.reply({ embeds: [skywarsEmbed] });
         }).catch((err) => {
-            interaction.reply(`${username} is not a valid name! Are they nicked?`);
+            interaction.reply(`"${username}" is not a valid name! Are they nicked?`);
             console.log(err);
         });
     }
