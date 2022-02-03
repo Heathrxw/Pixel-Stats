@@ -5,6 +5,7 @@
     "comma-number": "^2.1.0",
     "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
+    "fetch": "^1.1.0",
     "hypixel-api-reborn": "^10.0.0"
   }
 }
