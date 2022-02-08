@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const config = require('./config.json')
-const { createConnection } = require('mysql')
+const { createConnection } = require('mysql2')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 //Read Commands
