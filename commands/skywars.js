@@ -4,7 +4,7 @@ const {color, footer } = require('../config.json')
 const hypixelAPIReborn = require('../hypixel.js')
 const commaNumber = require('comma-number');
 const config = require('../config.json')
-const { createConnection } = require('mysql');
+const { createConnection } = require('mysql2');
 let con = createConnection(config.mysql);
 const fetch = require('node-fetch');
 
@@ -50,7 +50,7 @@ module.exports = {
              .setTimestamp()
              .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`   });
             interaction.reply({ embeds: [skywarsEmbed] });
-            con.query(`INSERT INTO SkywarsOverall (username,Kills,Deaths,Wins,Losses,KDR,WLR,Coins,Tokens,Level,Heads,Prestige,Souls) VALUES ('${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}','${Coins}','${Tokens}','${Level}','${Heads}','${Prestige}','${Souls}')`)
+            con.query(`INSERT INTO Skywars (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,Coins,Tokens,Level,Heads,Prestige,Souls) VALUES ('Overall','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}','${Coins}','${Tokens}','${Level}','${Heads}','${Prestige}','${Souls}')`)
         }).catch((err) => {
             interaction.reply(`"${username}" is not a valid name! Are they nicked?`);
             console.log(err);
