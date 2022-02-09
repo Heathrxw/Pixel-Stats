@@ -3,6 +3,10 @@ const { MessageEmbed } = require('discord.js');
 const {color, footer } = require('../config.json')
 const hypixelAPIReborn = require('../hypixel.js')
 const commaNumber = require('comma-number');
+const config = require('../config.json')
+const { createConnection } = require('mysql2');
+let con = createConnection(config.mysql);
+const fetch = require('node-fetch');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -12,20 +16,29 @@ module.exports = {
 
     async execute(interaction) {;
         const username = interaction.options.getString('username');
+        const uuid = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
+        const playerUUIDData = await uuid.json();
         hypixelAPIReborn.getPlayer(username).then((player) => {
+            const Coins = (player.stats.turbokartracers.coins)
+            const Laps = (player.stats.turbokartracers.completedLaps)
+            const BoxPickups = (player.stats.turbokartracers.boxPickups)
+            const goldTrophies = (player.stats.turbokartracers.goldTrophies)
+            const silverTrophies = (player.stats.turbokartracers.silverTrophies)
+            const bronzeTrophies = (player.stats.turbokartracers.bronzeTrophies)
             const tkr = new MessageEmbed()
             .setColor(color)
             .setTitle(`${player}'s Turbo Kart Racers Statistics`)
             .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/Turbo-Kart-Racers-64.png')
-            .addField('Coins', commaNumber(player.stats.turbokartracers.coins), true)
-            .addField('Laps', commaNumber(player.stats.turbokartracers.completedLaps), true)
-            .addField('Box Pickups', commaNumber(player.stats.turbokartracers.boxPickups), true)
-            .addField('Gold Trophies', commaNumber(player.stats.turbokartracers.goldTrophies), true)
-            .addField('Silver Trophies', commaNumber(player.stats.turbokartracers.silverTrophies), true)
-            .addField('Bronze Trophies', commaNumber(player.stats.turbokartracers.bronzeTrophies), true)
+            .addField('Coins', commaNumber(Coins), true)
+            .addField('Laps', commaNumber(Laps), true)
+            .addField('Box Pickups', commaNumber(BoxPickups), true)
+            .addField('Gold Trophies', commaNumber(goldTrophies), true)
+            .addField('Silver Trophies', commaNumber(silverTrophies), true)
+            .addField('Bronze Trophies', commaNumber(bronzeTrophies), true)
             .setTimestamp()
-            .setFooter({ text: footer });
+            .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`  });
             interaction.reply({ embeds: [tkr] });
+            con.query(`INSERT INTO TurboKartRacers (Mode,Username,Coins,Laps,BoxPickups,GoldTrophies,SilverTrophies,BronzeTrophies) VALUES ('TKR','${username}','${Coins}','${Laps}','${BoxPickups}','${goldTrophies}','${silverTrophies}','${bronzeTrophies}')`)
         }).catch((err) => {
             interaction.reply(`"${username}" is not a valid name! Are they nicked?`);
             console.log(err);
