@@ -38,7 +38,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`  });
             interaction.reply({ embeds: [megasolo] });
-            con.query(`INSERT INTO Skywars (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,playedGames) VALUES ('MegaSolo','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}')`)
+            con.query(`INSERT INTO Skywars (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR) VALUES ('MegaSolo','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}')`)
         }).catch((err) => {
             interaction.reply(`${username} is not a valid name! Are they nicked?`)
             console.log(err)
