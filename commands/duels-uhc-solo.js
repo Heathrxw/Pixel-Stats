@@ -11,7 +11,7 @@ const fetch = require('node-fetch');
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('duels-uhc-solo')
-    .setDescription('Gets specified players stats for solo UHC duels statistics')
+    .setDescription('Gets specified players stats for Solo UHC duels statistics')
     .addStringOption(option => option.setName('username').setRequired(true).setDescription('The username of the player you want to get the statistics of')),
 
     async execute(interaction) {;
@@ -30,7 +30,7 @@ module.exports = {
             const bestWinstreak = (player.stats.duels.uhc.solo.bestWinstreak)
             const solouhc = new MessageEmbed()
             .setColor(color)
-            .setTitle(`${player}'s Solo UHC Overall Duels Statistics`)
+            .setTitle(`${player}'s Solo UHC Duels Statistics`)
             .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/Duels-64.png')
             .addField('Kills', commaNumber(Kills), true)
             .addField('Deaths', commaNumber(Deaths), true)
