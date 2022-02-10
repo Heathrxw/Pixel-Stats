@@ -3,6 +3,9 @@ const hypixelAPIReborn = require('../hypixel.js')
 const { MessageEmbed } = require('discord.js');
 const {color, footer } = require('../config.json')
 const commaNumber = require('comma-number');
+const config = require('../config.json')
+const { createConnection } = require('mysql2');
+let con = createConnection(config.mysql);
 const fetch = require('node-fetch');
 
 module.exports = {
@@ -16,22 +19,32 @@ module.exports = {
         const uuid = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
         const playerUUIDData = await uuid.json();
         hypixelAPIReborn.getPlayer(username).then((player) => {
+            const Kills = (player.stats.duels.uhc.overall.kills)
+            const Deaths = (player.stats.duels.uhc.overall.deaths)
+            const Wins = (player.stats.duels.uhc.overall.wins)
+            const Losses = (player.stats.duels.uhc.overall.losses)
+            const KDR = (player.stats.duels.uhc.overall.KDRatio)
+            const WLR = (player.stats.duels.uhc.overall.WLRatio)
+            const playedGames = (player.stats.duels.uhc.overall.playedGames)
+            const Winstreak = (player.stats.duels.uhc.overall.winstreak)
+            const bestWinstreak = (player.stats.duels.uhc.overall.bestWinstreak)
             const uhc = new MessageEmbed()
             .setColor(color)
             .setTitle(`${player}'s UHC Overall Duels Statistics`)
             .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/Duels-64.png')
-            .addField('Kills', commaNumber(player.stats.duels.uhc.overall.kills), true)
-            .addField('Deaths', commaNumber(player.stats.duels.uhc.overall.deaths), true)
-            .addField('Wins', commaNumber(player.stats.duels.uhc.overall.wins), true)
-            .addField('Losses', commaNumber(player.stats.duels.uhc.overall.losses), true)
-            .addField('KDR', commaNumber(player.stats.duels.uhc.overall.KDRatio), true)
-            .addField('WLR', commaNumber(player.stats.duels.uhc.overall.WLRatio), true)
-            .addField('Played Games', commaNumber(player.stats.duels.uhc.overall.playedGames), true)
-            .addField('Winstreak', commaNumber(player.stats.duels.uhc.overall.winstreak), true)
-            .addField('Best Winstreak', commaNumber(player.stats.duels.uhc.overall.bestWinstreak), true)
+            .addField('Kills', commaNumber(Kills), true)
+            .addField('Deaths', commaNumber(Deaths), true)
+            .addField('Wins', commaNumber(Wins), true)
+            .addField('Losses', commaNumber(Losses), true)
+            .addField('KDR', commaNumber(KDR), true)
+            .addField('WLR', commaNumber(WLR), true)
+            .addField('Played Games', commaNumber(playedGames), true)
+            .addField('Winstreak', commaNumber(Winstreak), true)
+            .addField('Best Winstreak', commaNumber(bestWinstreak), true)
             .setTimestamp()
             .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`  });
             interaction.reply({ embeds: [uhc] });
+            con.query(`INSERT INTO Duels (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,playedGames,Winstreak,bestWinstreak) VALUES ('UHCOverall','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}','${playedGames}','${Winstreak}','${bestWinstreak}')`)
         }).catch((err) => {
             interaction.reply(`${username} is not a valid name! Are they nicked?`)
             console.log(err)
