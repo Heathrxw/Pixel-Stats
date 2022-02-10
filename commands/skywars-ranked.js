@@ -19,13 +19,13 @@ module.exports = {
         const uuid = await fetch(`https://api.mojang.com/users/profiles/minecraft/${username}`);
         const playerUUIDData = await uuid.json();
         hypixelAPIReborn.getPlayer(username).then((player) => {
-            const Kills = (player.stats.skywars.solo.ranked.kills)
-            const Deaths = (player.stats.skywars.solo.ranked.deaths)
-            const Wins = (player.stats.skywars.solo.ranked.wins)
-            const Losses = (player.stats.skywars.solo.ranked.losses)
-            const KDR = (player.stats.skywars.solo.ranked.KDRatio)
-            const WLR = (player.stats.skywars.solo.ranked.WLRatio)
-            const playedGames = (player.stats.skywars.solo.ranked.playedGames)
+            const Kills = (player.stats.skywars.ranked.kills)
+            const Deaths = (player.stats.skywars.ranked.deaths)
+            const Wins = (player.stats.skywars.ranked.wins)
+            const Losses = (player.stats.skywars.ranked.losses)
+            const KDR = (player.stats.skywars.ranked.KDRatio)
+            const WLR = (player.stats.skywars.ranked.WLRatio)
+            const playedGames = (player.stats.skywars.ranked.playedGames)
             const ranked = new MessageEmbed()
             .setColor(color)
             .setTitle(`${player}'s Ranked Skywars Statistics`)
