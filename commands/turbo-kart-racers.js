@@ -11,7 +11,7 @@ const fetch = require('node-fetch');
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('turbo-kart-racers')
-    .setDescription('Gets specified players turbo kart racers statistics')
+    .setDescription('Gets specified players Turbo Kart Racers statistics')
     .addStringOption(option => option.setName('username').setRequired(true).setDescription('The username of the player you want to get the statistics of')),
 
     async execute(interaction) {;
