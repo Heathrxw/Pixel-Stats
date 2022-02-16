@@ -35,7 +35,7 @@ module.exports = {
             const bwthrees = new MessageEmbed()
             .setColor(color)
             .setTitle(`${player}'s Threes Bedwars Statistics`)
-            .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/Skywars-64.png')
+            .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/BedWars-64.png')
             .addField('Kills', commaNumber(kills), true)
             .addField('Deaths', commaNumber(deaths), true)
             .addField('Wins', commaNumber(wins), true)
