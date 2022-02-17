@@ -52,7 +52,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`});
             interaction.reply({ embeds: [bwdoubles] });
-            con.query(`INSERT INTO Bedwars (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,Winstreak,AvgKills,AvgBeds,AvgFinals,BedsBroke,BedsLost,BedsRatio) VALUES ('DoublesBedwars','${username}','${kills}','${deaths}','${wins}','${losses}','${kdr}','${wlr}','${winstreak}','${avgkills}','${avgbeds}','${avgfinals}','${BedsBroke}','${BedsLost}','${BedsRatio}')`);
+            con.query(`INSERT INTO Bedwars (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,Winstreak,AvgKills,AvgBedsBroke,AvgFinalKills,BedsBroke,BedsLost,BedsRatio) VALUES ('DoublesBedwars','${username}','${kills}','${deaths}','${wins}','${losses}','${kdr}','${wlr}','${winstreak}','${avgkills}','${avgbeds}','${avgfinals}','${BedsBroke}','${BedsLost}','${BedsRatio}')`);
         }).catch((err) => {
             interaction.reply(`${username} is not a valid name! Are they nicked?`)
             console.log(err)
