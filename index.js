@@ -9,11 +9,41 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 //Read Commands
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFilesCore = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFilesSkywars = fs.readdirSync('./commands/Skywars').filter(file => file.endsWith('.js'));
+const commandFilesBedwars = fs.readdirSync('./commands/Bedwars').filter(file => file.endsWith('.js'));
+const commandFilesDuels = fs.readdirSync('./commands/Duels').filter(file => file.endsWith('.js'));
+const commandFilesClassic = fs.readdirSync('./commands/Classic').filter(file => file.endsWith('.js'));
+const commandFilesExternal = fs.readdirSync('./commands/External').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
+for (var file of commandFilesCore) {
+	const command = require(`./commands/Core/${file}`);
 	client.commands.set(command.data.name, command);
+}
+
+for (var file of commandFilesSkywars) {
+	const command1 = require(`./commands/Skywars/${file}`);
+	client.commands.set(command1.data.name, command1);
+}
+
+for (var file of commandFilesBedwars) {
+	const command2 = require(`./commands/Bedwars/${file}`);
+	client.commands.set(command2.data.name, command2);
+}
+
+for (var file of commandFilesDuels) {
+	const command3 = require(`./commands/Duels/${file}`);
+	client.commands.set(command3.data.name, command3);
+}
+
+for (var file of commandFilesClassic) {
+	const command4 = require(`./commands/Classic/${file}`);
+	client.commands.set(command4.data.name, command4);
+}
+
+for (var file of commandFilesExternal) {
+	const command5 = require(`./commands/External/${file}`);
+	client.commands.set(command5.data.name, command5);
 }
 
 //Bot Online
@@ -27,11 +57,10 @@ client.on('interactionCreate', interaction => {
 });
 
 //Connect to MySQL database for user stats logging
-
+console.log("Connecting to database...");
 let con = createConnection(config.mysql);
 con.connect(err => {
     if(err)return console.log('Connection to the database has been lost!' + err);
-    console.log("Connecting to database...");
     console.log("Connected to database!");
 })
 
