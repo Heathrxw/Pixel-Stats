@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed} = require('discord.js');
-const {color, footer } = require('../../config.json')
+const {color} = require('../../config.json')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,9 +17,7 @@ module.exports = {
     .addField('Minigames', 'Use /(game) to get the stats for the specified game!')
     .addField('Specific', 'Use /(game)-(mode) to get the stats for the specified game and mode (will bring up specific commands)!')
     .addField('Valid Modes', 'The valid games so far are: Skywars and Duels')
-    .setFooter({ text: 'Stats Pixel Help Menu, For more info visit https://heathrxw.xyz/t/statspixel'});
+    .setFooter({ text: 'Stats Pixel Help Menu, For more info visit https://pixel-stats.heathrxw.xyz'});
     interaction.reply({ embeds: [embed] });
-
-
     }
 }
