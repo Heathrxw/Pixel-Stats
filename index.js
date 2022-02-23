@@ -5,7 +5,6 @@ const { token } = require('./config.json');
 const config = require('./config.json')
 const { createConnection } = require('mysql2')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
 //Read Commands
 
 client.commands = new Collection();
@@ -16,6 +15,7 @@ const commandFilesDuels = fs.readdirSync('./commands/Duels').filter(file => file
 const commandFilesClassic = fs.readdirSync('./commands/Classic').filter(file => file.endsWith('.js'));
 const commandFilesExternal = fs.readdirSync('./commands/External').filter(file => file.endsWith('.js'));
 const commandFilesBlitz = fs.readdirSync('./commands/Blitz').filter(file => file.endsWith('.js'));
+const commandFilesSpeedUHC = fs.readdirSync('./commands/SpeedUHC').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -48,9 +48,15 @@ for (var file of commandFilesExternal) {
 }
 
 for (var file of commandFilesBlitz) {
-	const command5 = require(`./commands/Blitz/${file}`);
-	client.commands.set(command5.data.name, command5);
+	const command6 = require(`./commands/Blitz/${file}`);
+	client.commands.set(command6.data.name, command6);
 }
+
+for (var file of commandFilesSpeedUHC) {
+	const command7 = require(`./commands/SpeedUHC/${file}`);
+	client.commands.set(command7.data.name, command7);
+}
+
 
 //Bot Online
 
