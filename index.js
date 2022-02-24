@@ -16,6 +16,7 @@ const commandFilesClassic = fs.readdirSync('./commands/Classic').filter(file => 
 const commandFilesExternal = fs.readdirSync('./commands/External').filter(file => file.endsWith('.js'));
 const commandFilesBlitz = fs.readdirSync('./commands/Blitz').filter(file => file.endsWith('.js'));
 const commandFilesSpeedUHC = fs.readdirSync('./commands/SpeedUHC').filter(file => file.endsWith('.js'));
+const commandFilesWarlords = fs.readdirSync('./commands/Warlords').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -55,6 +56,11 @@ for (var file of commandFilesBlitz) {
 for (var file of commandFilesSpeedUHC) {
 	const command7 = require(`./commands/SpeedUHC/${file}`);
 	client.commands.set(command7.data.name, command7);
+}
+
+for (var file of commandFilesWarlords) {
+	const command8 = require(`./commands/Warlords/${file}`);
+	client.commands.set(command8.data.name, command8);
 }
 
 
