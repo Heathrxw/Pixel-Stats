@@ -17,6 +17,7 @@ const commandFilesExternal = fs.readdirSync('./commands/External').filter(file =
 const commandFilesBlitz = fs.readdirSync('./commands/Blitz').filter(file => file.endsWith('.js'));
 const commandFilesSpeedUHC = fs.readdirSync('./commands/SpeedUHC').filter(file => file.endsWith('.js'));
 const commandFilesWarlords = fs.readdirSync('./commands/Warlords').filter(file => file.endsWith('.js'));
+const commandFilesArcade = fs.readdirSync('./commands/Arcade').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -63,6 +64,10 @@ for (var file of commandFilesWarlords) {
 	client.commands.set(command8.data.name, command8);
 }
 
+for (var file of commandFilesArcade) {
+	const command9 = require(`./commands/Arcade/${file}`);
+	client.commands.set(command9.data.name, command9);
+}
 
 //Bot Online
 
