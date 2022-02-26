@@ -14,6 +14,7 @@ const commandFilesBlitz = fs.readdirSync('./commands/Blitz').filter(file => file
 const commandFilesSpeedUHC = fs.readdirSync('./commands/SpeedUHC').filter(file => file.endsWith('.js'));
 const commandFilesWarlords = fs.readdirSync('./commands/Warlords').filter(file => file.endsWith('.js'));
 const commandFilesArcade = fs.readdirSync('./commands/Arcade').filter(file => file.endsWith('.js'));
+const commandFilesBuildBattle = fs.readdirSync('./commands/BuildBattle').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -62,6 +63,11 @@ for (var file of commandFilesWarlords) {
 
 for (var file of commandFilesArcade) {
 	const command = require(`./commands/Arcade/${file}`);
+	commands.push(command.data.toJSON());
+}
+
+for (var file of commandFilesBuildBattle) {
+	const command = require(`./commands/BuildBattle/${file}`);
 	commands.push(command.data.toJSON());
 }
 
