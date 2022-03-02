@@ -30,12 +30,12 @@ module.exports = {
     hypixelAPIReborn
       .getPlayer(username)
       .then((player) => {
-        const Kills = player.stats.blitzsg.kills;
-        const Deaths = player.stats.blitzsg.deaths;
-        const KDR = player.stats.blitzsg.KDRatio;
-        const SoloWins = player.stats.blitzsg.winsSolo;
-        const TeamWins = player.stats.blitzsg.winsTeam;
-        const Coins = player.stats.blitzsg.coins;
+        const Kills = (player.stats.blitzsg.kills);
+        const Deaths = (player.stats.blitzsg.deaths);
+        const KDR = (player.stats.blitzsg.KDRatio);
+        const SoloWins = (player.stats.blitzsg.winsSolo);
+        const TeamWins = (player.stats.blitzsg.winsTeam);
+        const Coins = (player.stats.blitzsg.coins);
         const blitzsg = new MessageEmbed()
           .setColor(color)
           .setTitle(`${player}'s Blitz SG Statistics`)
