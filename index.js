@@ -19,6 +19,7 @@ const commandFilesSpeedUHC = fs.readdirSync('./commands/SpeedUHC').filter(file =
 const commandFilesWarlords = fs.readdirSync('./commands/Warlords').filter(file => file.endsWith('.js'));
 const commandFilesArcade = fs.readdirSync('./commands/Arcade').filter(file => file.endsWith('.js'));
 const commandFilesBuildBattle = fs.readdirSync('./commands/BuildBattle').filter(file => file.endsWith('.js'));
+const commandFilesMegaWalls = fs.readdirSync('./commands/MegaWalls').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -73,6 +74,11 @@ for (var file of commandFilesArcade) {
 for (var file of commandFilesBuildBattle) {
 	const command10 = require(`./commands/BuildBattle/${file}`);
 	client.commands.set(command10.data.name, command10);
+}
+
+for (var file of commandFilesMegaWalls) {
+	const command11 = require(`./commands/MegaWalls/${file}`);
+	client.commands.set(command11.data.name, command11);
 }
 
 //Bot Online
