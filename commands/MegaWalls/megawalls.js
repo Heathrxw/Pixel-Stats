@@ -37,7 +37,7 @@ module.exports = {
             const defenderKills = (player.stats.megawalls.defenderKills)
             const megawalls = new MessageEmbed()
             .setColor(color)
-            .setTitle(`${player}'s Overall MegaWalls Statistics`)
+            .setTitle(`${player}'s Overall Mega Walls Statistics`)
             .setThumbnail('https://hypixel.net/styles/hypixel-v2/images/game-icons/MegaWalls-64.png')
             .addField('Kills', commaNumber(Kills), true)
             .addField('Deaths', commaNumber(Deaths), true)
@@ -58,8 +58,8 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`  });
             interaction.reply({ embeds: [megawalls] });
-            con.query(`INSERT INTO MegaWalls (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,Assists,FinalAssists,FinalKills,FinalDeaths,FinalKDR,Coins,Class,playedGames,WitherDamage,DefenderKills) VALUES ('MegaWalls','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}','${assists}','${finalAssists}','${finalKills}','${finalDeaths}','${finalKDRatio}','${coins}','${selectedClass}','${playedGames}','${witherDamage}','${defenderKills}')`
-}).catch((err) => {
+            con.query(`INSERT INTO MegaWalls (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR,Assists,FinalAssists,FinalKills,FinalDeaths,FinalKDR,Coins,Class,playedGames,WitherDamage,DefenderKills) VALUES ('MegaWalls','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}','${assists}','${finalAssists}','${finalKills}','${finalDeaths}','${finalKDRatio}','${coins}','${selectedClass}','${playedGames}','${witherDamage}','${defenderKills}')`)
+            }).catch((err) => {
             interaction.reply(`${username} is not a valid name! Are they nicked? If not do /help`)
             console.log(err)
         })
