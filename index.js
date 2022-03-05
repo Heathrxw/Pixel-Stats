@@ -92,6 +92,7 @@ client.on('interactionCreate', interaction => {
 });
 
 //Connect to MySQL database for user stats logging
+
 console.log("Connecting to database...");
 let con = createConnection(config.mysql);
 con.connect(err => {
