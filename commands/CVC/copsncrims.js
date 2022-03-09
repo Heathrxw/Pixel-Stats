@@ -22,9 +22,7 @@ module.exports = {
             const Kills = (player.stats.copsandcrims.kills)
             const Deaths = (player.stats.copsandcrims.deaths)
             const Wins = (player.stats.copsandcrims.wins)
-            const Losses = (player.stats.copsandcrims.losses)
             const KDR = (player.stats.copsandcrims.KDRatio)
-            const WLR = (player.stats.copsandcrims.WLRatio)
             const Coins = (player.stats.copsandcrims.coins)
             const RoundWins = (player.stats.copsandcrims.roundWins)
             const ShotsFired = (player.stats.copsandcrims.shotsFired)
@@ -40,9 +38,7 @@ module.exports = {
             .addField('Kills', commaNumber(Kills), true)
             .addField('Deaths', commaNumber(Deaths), true)
             .addField('Wins', commaNumber(Wins), true)
-            .addField('Losses', commaNumber(Losses), true)
             .addField('KDR', commaNumber(KDR), true)
-            .addField('WLR', commaNumber(WLR), true)
             .addField('Coins', commaNumber(Coins), true)
             .addField('Round Wins', commaNumber(RoundWins), true)
             .addField('Shots Fired', commaNumber(ShotsFired), true)
@@ -54,7 +50,7 @@ module.exports = {
             .setTimestamp()
             .setFooter({ text: footer, iconURL: `https://visage.surgeplay.com/face/256/${playerUUIDData.id}.png`  });
             interaction.reply({ embeds: [cvc] });
-            con.query(`INSERT INTO CVC (Mode,Username,Deaths,Wins,Losses,WLR,Coins,roundWins,shotsFired,headshotKills,bombsDefused,bombsPlanted,killsAsCrim,killsAsCop) VALUES ('CVC','${username}','${Deaths}','${Wins}','${Losses}','${WLR}','${Coins}','${RoundWins}','${ShotsFired}','${HeadshotKills}','${BombsDefused}','${BombsPlanted}','${killsAsCrim}','${killsAsCop}')`)
+            con.query(`INSERT INTO CVC (Mode,Username,Deaths,Wins,Coins,roundWins,shotsFired,headshotKills,bombsDefused,bombsPlanted,killsAsCrim,killsAsCop) VALUES ('CVC','${username}','${Deaths}','${Wins}','${Coins}','${RoundWins}','${ShotsFired}','${HeadshotKills}','${BombsDefused}','${BombsPlanted}','${killsAsCrim}','${killsAsCop}')`)
         }).catch((err) => {
             interaction.reply(`${username} is not a valid name! Are they nicked?`)
             console.log(err)
