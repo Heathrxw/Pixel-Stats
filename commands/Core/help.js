@@ -39,7 +39,7 @@ module.exports = {
       )
       .addField(
         "Bedwars",
-        "/bedwars, /bedwars-solo, /bedwars-doubles, /bedwars-threes, /bedwars-fours"
+        "/bedwars, /bedwars-solo, /bedwars-doubles, /bedwars-threes, /bedwars-fours, /bedwars-ultimate-doubles, /bedwars-ultimate-fours, /bedwars-rush-doubles, /bedewars-rush-fours, /bedwars-armed-doubles, /bedwars-armed-fours"
       )
       .addField("Blitz", "/blitz")
       .addField("Build Battle", "/build-battle")
@@ -59,10 +59,10 @@ module.exports = {
       .setColor(color)
       .setTitle("Stats Pixel Changelog")
       .setThumbnail("https://i.heathrxw.xyz/hypixel.png")
-      .addField("Version", "0.7.3")
+      .addField("Version", "0.7.8")
       .addField(
         "Changes",
-        "Added buttons to help menu, reformatted some commands, added new help menu, created new website, added database status, "
+        "Formatted a lot of commands, Added cops n crims, updated help file, added dreams mode to bedwars, added megawalls"
       );
 
     let page4 = new MessageEmbed()
