@@ -17,6 +17,7 @@ const commandFilesArcade = fs.readdirSync('./commands/Arcade').filter(file => fi
 const commandFilesBuildBattle = fs.readdirSync('./commands/BuildBattle').filter(file => file.endsWith('.js'));
 const commandFilesMegaWalls = fs.readdirSync('./commands/MegaWalls').filter(file => file.endsWith('.js'));
 const commandFilesCVC = fs.readdirSync('./commands/CVC').filter(file => file.endsWith('.js'));
+const commandFilesMurderMystery = fs.readdirSync('./commands/MurderMystery').filter(file => file.endsWith('.js'));
 
 
 for (var file of commandFilesCore) {
@@ -81,6 +82,11 @@ for (var file of commandFilesMegaWalls) {
 
 for (var file of commandFilesCVC) {
 	const command = require(`./commands/CVC/${file}`);
+	commands.push(command.data.toJSON());
+}
+
+for (var file of commandFilesMurderMystery) {
+	const command = require(`./commands/MurderMystery/${file}`);
 	commands.push(command.data.toJSON());
 }
 
