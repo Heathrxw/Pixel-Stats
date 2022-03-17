@@ -57,7 +57,7 @@ module.exports = {
           });
         interaction.reply({ embeds: [murdermystery] });
         con.query(
-          `INSERT INTO MurderMystery (Mode,Username,Kills,Deaths,Wins,Losses,KDR,WLR) VALUES ('MurderMystery','${username}','${Kills}','${Deaths}','${Wins}','${Losses}','${KDR}','${WLR}')`
+          `INSERT INTO MurderMystery (Mode,Username,Kills,Deaths,Wins,winsAsMurderer,winsAsDetective,Coins,playedGames) VALUES ('MurderMystery','${username}','${Kills}','${Deaths}','${Wins}','${MurdererWins}','${DetectiveWins}','${Coins}','${PlayedGames}')`
         );
       })
       .catch((err) => {
