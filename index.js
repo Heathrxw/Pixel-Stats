@@ -103,6 +103,12 @@ client.on('interactionCreate', interaction => {
     console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction!`);
 });
 
+const app = express();
+const port = 3002;
+
+app.get('/', (req, res) => res.send('This might be working!'));
+app.listen(port, () => console.log(`Pixel Stats is alive at http://localhost:${port}`));
+
 //Connect to MySQL database for user stats logging
 
 console.log("Connecting to database...");
