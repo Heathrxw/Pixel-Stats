@@ -5,6 +5,7 @@ const { token } = require('./config.json');
 const config = require('./config.json')
 const { createConnection } = require('mysql2')
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const express = require('express');
 //Read Commands
 
 client.commands = new Collection();
@@ -22,6 +23,7 @@ const commandFilesBuildBattle = fs.readdirSync('./commands/BuildBattle').filter(
 const commandFilesMegaWalls = fs.readdirSync('./commands/MegaWalls').filter(file => file.endsWith('.js'));
 const commandFilesCVC = fs.readdirSync('./commands/CVC').filter(file => file.endsWith('.js'));
 const commandFilesMurderMystery = fs.readdirSync('./commands/MurderMystery').filter(file => file.endsWith('.js'));
+const commandFilesUHC = fs.readdirSync(`./commands/UHC/`).filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -93,41 +95,48 @@ for (var file of commandFilesMurderMystery) {
 	client.commands.set(command13.data.name, command13);
 }
 
+for (var file of commandFilesUHC) {
+	const command14 = require(`./commands/UHC/${file}`);
+	client.commands.set(command14.data.name, command14);
+}
+
 //Bot Online
 
 client.once('ready', () => {
-	console.log('Pixel Stats is now online!');
+	console.log('[BOT] Pixel Stats is now online!');
 	client.user.setActivity(`Hypixel Stats Bot, /help`);
 });
 client.on('interactionCreate', interaction => {
-    console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction!`);
+    console.log(`[ACTION] ${interaction.user.tag} in #${interaction.channel.name} triggered an interaction!`);
 });
+
+//Allows to ping bot for status website
 
 const app = express();
 const port = 3002;
 
-app.get('/', (req, res) => res.send('This might be working!'));
-app.listen(port, () => console.log(`Pixel Stats is alive at http://localhost:${port}`));
+app.get('/', (req, res) => res.send('Pixel Stats is Alive!'));
+app.listen(port, () => console.log(`[PING] Pixel Stats is alive at http://localhost:${port}`));
 
 //Connect to MySQL database for user stats logging
 
-console.log("Connecting to database...");
+console.log("[DATABASE] Connecting to database...");
 let con = createConnection(config.mysql);
 con.connect(err => {
-    if(err)return console.log('Connection to the database has been lost!' + err);
-    console.log("Connected to database!");
+    if(err)return console.log('[DATABASE] Connection to the database has been lost!' + err);
+    console.log("[DATABASE] Connected to database!");
 })
 
 //Notifier for guild join
 
 client.on("guildCreate", guild => {
-	console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
+	console.log(`[INFO] New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
 })
 
 //Notifer for guild leave
 
 client.on("guildDelete", guild => {
-	console.log(`Removed from guild: ${guild.name} (id: ${guild.id})`);
+	console.log(`[INFO] Removed from guild: ${guild.name} (id: ${guild.id})`);
   });
 
 //Creates slash commands
