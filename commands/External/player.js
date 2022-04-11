@@ -57,7 +57,6 @@ module.exports = {
 
             const firstL = firstLDate.toLocaleString()
             const lastL = lastLDate.toLocaleString()
-            const pc = (player.plusColor.color)
 
             const playerInfoEmbed = new MessageEmbed()
                 .setTitle('Player Stats')
@@ -83,9 +82,10 @@ module.exports = {
             playerInfoEmbed.addField('Status:', playerIsOnline, true)
 
             if (player.rank.includes('MVP+')) {
-                if (player.plusColor == null) {
+                if (player.plusColor.color == null) {
                     playerInfoEmbed.addField('Plus Color:', 'Red')
                 } else {
+                    let pc = (player.plusColor.color);
                     playerInfoEmbed.addField('Plus Color:', (pc), true)
                 }
             }
