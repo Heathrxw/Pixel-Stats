@@ -19,6 +19,7 @@ const commandFilesMegaWalls = fs.readdirSync('./commands/MegaWalls').filter(file
 const commandFilesCVC = fs.readdirSync('./commands/CVC').filter(file => file.endsWith('.js'));
 const commandFilesMurderMystery = fs.readdirSync('./commands/MurderMystery').filter(file => file.endsWith('.js'));
 const commandFilesUHC = fs.readdirSync('./commands/UHC').filter(file => file.endsWith('.js'));
+const commandFilesTNT = fs.readdirSync('./commands/TNTGames').filter(file => file.endsWith('.js'));
 
 
 for (var file of commandFilesCore) {
@@ -93,6 +94,11 @@ for (var file of commandFilesMurderMystery) {
 
 for (var file of commandFilesUHC) {
 	const command = require(`./commands/UHC/${file}`);
+	commands.push(command.data.toJSON());
+}
+
+for (var file of commandFilesTNT) {
+	const command = require(`./commands/TNTGames/${file}`);
 	commands.push(command.data.toJSON());
 }
 
