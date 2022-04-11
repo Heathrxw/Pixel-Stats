@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { token } = require('./config.json');
 const config = require('./config.json')
-const { createConnection } = require('mysql2')
+const { createConnection } = require('mysql2');
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const express = require('express');
 //Read Commands
@@ -24,6 +24,7 @@ const commandFilesMegaWalls = fs.readdirSync('./commands/MegaWalls').filter(file
 const commandFilesCVC = fs.readdirSync('./commands/CVC').filter(file => file.endsWith('.js'));
 const commandFilesMurderMystery = fs.readdirSync('./commands/MurderMystery').filter(file => file.endsWith('.js'));
 const commandFilesUHC = fs.readdirSync(`./commands/UHC/`).filter(file => file.endsWith('.js'));
+const commandFilesTNTGames = fs.readdirSync('./commands/TNTGames').filter(file => file.endsWith('.js'));
 
 for (var file of commandFilesCore) {
 	const command = require(`./commands/Core/${file}`);
@@ -100,6 +101,11 @@ for (var file of commandFilesUHC) {
 	client.commands.set(command14.data.name, command14);
 }
 
+for (var file of commandFilesTNTGames) {
+	const command15 = require(`./commands/TNTGames/${file}`);
+	client.commands.set(command15.data.name, command15);
+}
+
 //Bot Online
 
 client.once('ready', () => {
@@ -131,12 +137,14 @@ con.connect(err => {
 
 client.on("guildCreate", guild => {
 	console.log(`[INFO] New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)
+	con.query(`INSERT INTO Servers (Action, SID, Name, Members) VALUES ('Joined', '${guild.id}', '${guild.name}', '${guild.memberCount}')`);
 })
 
 //Notifer for guild leave
 
 client.on("guildDelete", guild => {
 	console.log(`[INFO] Removed from guild: ${guild.name} (id: ${guild.id})`);
+	con.query(`INSERT INTO Servers (Action, SID, Name, Members) VALUES ('Removed', '${guild.id}', '${guild.name}', '${guild.memberCount}')`);
   });
 
 //Creates slash commands
@@ -156,6 +164,6 @@ client.on('interactionCreate', async interaction => {
 	}
 });
 
-//Logs in with bot token
 
+//Logs in with bot token
 client.login(token);
