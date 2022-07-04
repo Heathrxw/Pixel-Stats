@@ -42,6 +42,7 @@ module.exports = {
         const Heads = player.stats.skywars.heads;
         const Prestige = player.stats.skywars.prestige;
         const Souls = player.stats.skywars.souls;
+        const playedGames = (Wins + Losses)
         const skywarsEmbed = new MessageEmbed()
           .setColor(color)
           .setTitle(`${player}'s Skywars Overall Statistics`)
@@ -60,6 +61,7 @@ module.exports = {
           .addField("Heads", commaNumber(Heads), true)
           .addField("Prestige", commaNumber(Prestige), true)
           .addField("Souls", commaNumber(Souls), true)
+          .addField("Games Played", commaNumber(playedGames), true)
           .setTimestamp()
           .setFooter({
             text: footer,
